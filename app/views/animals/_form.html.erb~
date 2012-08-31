@@ -1,0 +1,37 @@
+<%= form_for(@animal) do |f| %>
+  <% if @animal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@animal.errors.count, "error") %> prohibited this animal from being saved:</h2>
+
+      <ul>
+      <% @animal.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Namn %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :Id_merke %><br />
+    <%= f.text_field :id_tag %>
+  </div>
+  <div class="field">
+    <%= f.label :Fødselsdato %><br />
+    <%= f.date_select :birth_date %>
+  </div>
+  <div class="field">
+    <%= f.label :kjønn %> <%= f.enum_select :sex %> <br />
+  </div>
+ 
+ <div class="field">
+  <%= f.label :Foreldre %> <%= collection_select(@animal, Animal.all, :id, :name, {:prompt => true}) %> <br />
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

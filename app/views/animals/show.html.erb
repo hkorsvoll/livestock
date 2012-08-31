@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Namnet på dyret:</b>
+  <%= @animal.name %>
+</p>
+
+<p>
+  <b>ID-merket:</b>
+  <%= @animal.id_tag %>
+</p>
+
+<p>
+  <b>Fødselsdato:</b>
+  <%= @animal.birth_date %>
+</p>
+
+<p>
+  <b>Kjønn:</b>
+  <%= @animal.sex %>
+</p>
+
+<p>
+  <b>Foreldre:</b>
+  <ul>
+    <%= @animal.parents.each do |parent| %>
+    <li><%= parent.id_tag =%></li>
+    <% end %>
+  </ul>
+</p>
+
+
+<%= link_to 'Edit', edit_animal_path(@animal) %> |
+<%= link_to 'Back', animals_path %>

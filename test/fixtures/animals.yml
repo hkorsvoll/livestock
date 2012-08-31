@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  id_tag: MyString
+  birth_date: 2012-08-26
+  death_date: 2012-08-26
+  sex: 
+
+two:
+  name: MyString
+  id_tag: MyString
+  birth_date: 2012-08-26
+  death_date: 2012-08-26
+  sex: 
