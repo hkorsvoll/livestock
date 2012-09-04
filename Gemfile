@@ -40,3 +40,4 @@ gem 'jquery-rails'
 
 gem 'enumerated_attribute'
 gem 'simple_form'
+gem 'uuidtools'

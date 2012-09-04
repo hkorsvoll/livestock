@@ -41,10 +41,11 @@ class AnimalsController < ApplicationController
   # POST /animals.json
   def create
     @animal = Animal.new(params[:animal])
-#    @animal.parent = Animal
+    @animal.mother = Animal.find(params[:animal][:mother])
+    @animal.father = Animal.find(params[:animal][:father])
 
     respond_to do |format|
-      if @animal.save #&& ( @animalrelation.save || !params[:animalrelation])
+      if @animal.save
         format.html { redirect_to @animal, :notice => 'Animal was successfully created.' }
         format.json { render :json => @animal, :status => :created, :location => @animal }
       else
@@ -58,9 +59,12 @@ class AnimalsController < ApplicationController
   # PUT /animals/1.json
   def update
     @animal = Animal.find(params[:id])
+    @animal.assign_attributes(params[:animal])
+    @animal.mother = Animal.find(params[:animal][:mother])
+    @animal.father = Animal.find(params[:animal][:father])
 
     respond_to do |format|
-      if @animal.update_attributes(params[:animal])
+      if @animal.save
         format.html { redirect_to @animal, :notice => 'Animal was successfully updated.' }
         format.json { head :no_content }
       else

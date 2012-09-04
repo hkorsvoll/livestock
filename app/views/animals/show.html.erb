@@ -20,15 +20,21 @@
   <%= @animal.sex %>
 </p>
 
+<% if @animal.mother %>
 <p>
-  <b>Foreldre:</b>
-  <ul>
-    <%= @animal.parents.each do |parent| %>
-    <li><%= parent.id_tag =%></li>
-    <% end %>
-  </ul>
+  <b>Mor:</b>
+  <%= @animal.mother.id_tag =%>
+  <%= @animal.mother.name =%>
 </p>
+<% end %>
 
+<% if @animal.father %>
+<p>
+  <b>Far:</b>
+  <%= @animal.father.id_tag =%>
+  <%= @animal.father.name =%>
+</p>
+<% end %>
 
 <%= link_to 'Edit', edit_animal_path(@animal) %> |
 <%= link_to 'Back', animals_path %>

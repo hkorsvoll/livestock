@@ -28,7 +28,8 @@
   </div>
  
  <div class="field">
-  <%= f.label :Foreldre %> <%= collection_select(:parent, Animal.all, :id, :name, {:prompt => true}) %> <br />
+  <%= f.label :Mor %> <%= f.collection_select(:mother, Animal.all, :id, :name, {:prompt => true}) %> <br />
+  <%= f.label :Far %> <%= f.collection_select(:father, Animal.all, :id, :name, {:prompt => true}) %> <br />
   </div>
 
   <div class="actions">
