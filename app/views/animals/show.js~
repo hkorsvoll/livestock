@@ -1,0 +1,1 @@
+$('#display-details').html(<%= escape_javascript(render :partial => "animals/show.html.erb") %>);

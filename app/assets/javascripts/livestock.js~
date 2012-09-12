@@ -1,0 +1,6 @@
+$(document).ready(function () {
+  $('.show_animal').bind('ajax:success', function() {
+    alert('Vis dyr: Success');
+  });
+});
+  

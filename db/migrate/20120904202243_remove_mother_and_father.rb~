@@ -1,0 +1,8 @@
+class RemoveMotherAndFather < ActiveRecord::Migration
+  def change
+    rename_column :animal, :mother, :mother_id
+    remove_column :animal, :father, :father_id
+  end
+end
+
+

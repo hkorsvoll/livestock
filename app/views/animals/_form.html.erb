@@ -1,4 +1,4 @@
-<%= form_for(@animal) do |f| %>
+<%= form_for(@animal, :html => { :class => "ym-form ym-columnar"} ) do |f| %>
   <% if @animal.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@animal.errors.count, "error") %> prohibited this animal from being saved:</h2>
@@ -11,26 +11,28 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :Namn %><br />
+  <div class="field ym-fbox-text">
+    <%= f.label :Namn %>
     <%= f.text_field :name %>
   </div>
-  <div class="field">
-    <%= f.label :Id_merke %><br />
+  <div class="field ym-fbox-text">
+    <%= f.label :Id_merke %>
     <%= f.text_field :id_tag %>
   </div>
-  <div class="field">
-    <%= f.label :Fødselsdato %><br />
-    <%= f.date_select :birth_date %>
+  <div class="field ym-fbox-select">
+    <%= f.label :Fødselsdato %>
+    <%= f.date_select :birth_date, {}, { :style => "width: 23%" } %>
   </div>
-  <div class="field">
-    <%= f.label :kjønn %> <%= f.enum_select :sex %> <br />
+  <div class="field ym-fbox-select">
+    <%= f.label :kjønn %> <%= f.enum_select :sex %>
   </div>
  
- <div class="field">
-  <%= f.label :Mor %> <%= f.collection_select(:mother, Animal.all, :id, :name, {:prompt => true}) %> <br />
-  <%= f.label :Far %> <%= f.collection_select(:father, Animal.all, :id, :name, {:prompt => true}) %> <br />
-  </div>
+ <div class="field ym-fbox-select">
+  <%= f.label :Mor %> <%= f.collection_select(:mother_id, @female_animals, :id, :name, {:prompt => true}) %>
+ </div>
+ <div class="field ym-fbox-select">
+  <%= f.label :Far %> <%= f.collection_select(:father_id, @male_animals, :id, :name, {:prompt => true}) %>
+ </div>
 
   <div class="actions">
     <%= f.submit %>

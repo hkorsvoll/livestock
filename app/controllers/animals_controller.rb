@@ -18,6 +18,7 @@ class AnimalsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @animal }
+      format.js
     end
   end
 
@@ -25,7 +26,8 @@ class AnimalsController < ApplicationController
   # GET /animals/new.json
   def new
     @animal = Animal.new
-
+    @male_animals = Animal.where("sex = 'male'")
+    @female_animals = Animal.where("sex = 'female'")
     respond_to do |format|
       format.html # new.html.erb
       format.json { render :json => @animal }
@@ -35,14 +37,14 @@ class AnimalsController < ApplicationController
   # GET /animals/1/edit
   def edit
     @animal = Animal.find(params[:id])
+    @male_animals = Animal.where("sex = 'male'")
+    @female_animals = Animal.where("sex = 'female'")
   end
 
   # POST /animals
   # POST /animals.json
   def create
     @animal = Animal.new(params[:animal])
-    @animal.mother = Animal.find(params[:animal][:mother])
-    @animal.father = Animal.find(params[:animal][:father])
 
     respond_to do |format|
       if @animal.save
@@ -60,8 +62,6 @@ class AnimalsController < ApplicationController
   def update
     @animal = Animal.find(params[:id])
     @animal.assign_attributes(params[:animal])
-    @animal.mother = Animal.find(params[:animal][:mother])
-    @animal.father = Animal.find(params[:animal][:father])
 
     respond_to do |format|
       if @animal.save

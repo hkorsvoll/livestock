@@ -39,3 +39,4 @@ gem 'jquery-rails'
 # gem 'ruby-debug'
 
 gem 'enumerated_attribute'
+gem 'simple_form'

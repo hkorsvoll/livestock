@@ -59,5 +59,8 @@ module Livestock
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     config.gem "enumerated_attribute"
+    
+    # Adding default javascript framework
+    config.action_view.javascript_expansions[:defaults] = %w(jquery rails application) 
   end
 end

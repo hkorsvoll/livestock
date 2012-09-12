@@ -11,3 +11,10 @@
  *= require_self
  *= require_tree .
  */
+
+//= require yaml/core/base
+//= require yaml/navigation/hlist
+//= require yaml/forms/gray-theme
+//= require yaml/screen/screen-PAGE-layout
+//= require yaml/screen/typography
+//= require yaml/print/print
