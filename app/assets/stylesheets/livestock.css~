@@ -1,7 +1,0 @@
-/*PAGE layout*/
-.ym-wrapper {
-min-width: 510px;
-max-width: 60em;
-}
-.ym-wbox { padding: 10px; }
-

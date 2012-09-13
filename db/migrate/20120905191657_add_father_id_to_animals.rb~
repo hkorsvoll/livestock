@@ -1,4 +1,0 @@
-class AddFatherIdToAnimals < ActiveRecord::Migration
-  def change
-  end
-end

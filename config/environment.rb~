@@ -1,6 +1,0 @@
-# Load the rails application
-require File.expand_path('../application', __FILE__)
-config.gem "enumerated_attribute"
-
-# Initialize the rails application
-Livestock::Application.initialize!
