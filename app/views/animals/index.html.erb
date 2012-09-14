@@ -20,7 +20,7 @@
 	<td><%= animal.birth_date %></td>
 	<td><%= animal.sex %></td>
 	<td><%= link_to 'Vis', animal, :remote=>true, :class=>'show_animal'  %></td>
-	<td><%= link_to 'Rediger', edit_animal_path(animal) %></td>
+	<td><%= link_to 'Rediger', edit_animal_path(animal), :remote=>true, :class=>'edit_animal' %></td>
 	<td><%= link_to 'Slett', animal, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
       </tr>
     <% end %>

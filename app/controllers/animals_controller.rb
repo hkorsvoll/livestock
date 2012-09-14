@@ -39,6 +39,10 @@ class AnimalsController < ApplicationController
     @animal = Animal.find(params[:id])
     @male_animals = Animal.where("sex = 'male'")
     @female_animals = Animal.where("sex = 'female'")
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # POST /animals
