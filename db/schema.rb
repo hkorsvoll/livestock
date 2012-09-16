@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120905191657) do
+ActiveRecord::Schema.define(:version => 20120829163818) do
 
   create_table "animalrelations", :force => true do |t|
     t.integer  "animal_id"
@@ -28,8 +28,6 @@ ActiveRecord::Schema.define(:version => 20120905191657) do
     t.string   "sex"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "father_id"
-    t.integer  "mother_id"
   end
 
 end
