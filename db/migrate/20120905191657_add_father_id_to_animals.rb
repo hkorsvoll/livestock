@@ -1,7 +1,7 @@
 class AddFatherIdToAnimals < ActiveRecord::Migration
   def self.up
     change_table :animals do |t|
-      t.add :father_id, :mother_id, :integer
+      t.integer :father_id, :mother_id
     end
   end
   
