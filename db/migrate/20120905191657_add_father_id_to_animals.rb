@@ -1,8 +1,11 @@
 class AddFatherIdToAnimals < ActiveRecord::Migration
-  def change
+  def self.up
     change_table :animals do |t|
-      t.integer :father_id
-      t.integer :mother_id
+      t.add_column :father_id, :mother_id, :integer
     end
   end
+  
+  def self.down
+    change_table :animals do |t|
+      t.remove_column :father_id, :mother_id
 end

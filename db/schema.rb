@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(:version => 20120905191657) do
     t.string   "sex"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "mother_id"
     t.integer  "father_id"
+    t.integer  "mother_id"
   end
 
 end
