@@ -29,6 +29,7 @@ class AnimalsController < ApplicationController
     @male_animals = Animal.where("sex = 'male'")
     @female_animals = Animal.where("sex = 'female'")
     respond_to do |format|
+      format.js
       format.html # new.html.erb
       format.json { render :json => @animal }
     end
@@ -52,7 +53,7 @@ class AnimalsController < ApplicationController
 
     respond_to do |format|
       if @animal.save
-        format.html { redirect_to @animal, :notice => 'Animal was successfully created.' }
+        format.html { redirect_to @animal, :remote=>true, :class=>'show_animal', :notice => 'Animal was successfully created.' }
         format.json { render :json => @animal, :status => :created, :location => @animal }
       else
         format.html { render :action => "new" }
