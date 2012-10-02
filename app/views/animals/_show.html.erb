@@ -1,10 +1,14 @@
 <div class="livestock-show-animal">
-  <h1><%= @animal.name %></h1>
+  <% if @animal.sex = "female" %>
+    <h1>Søye <%= @animal.id_tag %></h1>
+  <% else %>
+    <h1>Vær <%= @animal.id_tag %></h1>
+  <% end %>
   <p id="notice"><%= notice %></p>
 
   <p>
-    <b>ID-merket:</b>
-    <%= @animal.id_tag %>
+    <b>Namn:</b>
+    <%= @animal.name %>
   </p>
 
   <p>
@@ -42,6 +46,19 @@
     <% end %>
     </ul>
   <% end %>
+  </p>
+  <hr>
+  <h2>Meldingar</h2>
+  <p>
+    <table>
+    <% @animal.messages.each do |message| %>
+      <tr>
+	<td><%= message.date_from %></td>
+	<td><%= message.message %></td>
+      </tr>
+    <% end %>
+    </table>
+  </p>
 
   <%= link_to 'Edit', edit_animal_path(@animal), :remote=>true, :class=>'edit_animal' %> |
   <%= link_to 'Back', animals_path %>

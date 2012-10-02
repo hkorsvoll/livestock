@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Notat:</b>
+  <%= @message.message %>
+</p>
+
+<p>
+  <b>Dato:</b>
+  <%= @message.date_from %>
+</p>
+
+<p>
+  <b>Dyr notatet gjeld for:</b>
+  <ul>
+  <% for animal in @message.animals %>
+    <li><%= animal.id_tag %></li>
+  <% end %>
+  </ul>
+<%= link_to 'Edit', edit_message_path(@message) %> |
+<%= link_to 'Back', messages_path %>

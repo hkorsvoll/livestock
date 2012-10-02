@@ -5,6 +5,7 @@ class Animal < ActiveRecord::Base
   belongs_to :mother, :class_name => 'Animal'#, :foreign_key => 'mother_id'
   belongs_to :father, :class_name => 'Animal'#, :foreign_key => 'father_id'
   has_many :children, :class_name => 'Animal', :foreign_key => 'mother_id'
+  has_and_belongs_to_many :messages
 #  accepts_nested_attributes_for :mother, :father#, :mother_id, :father_id
 #  attr_writer :mother_id, :father_id
   

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120905191657) do
+ActiveRecord::Schema.define(:version => 20120922204425) do
 
   create_table "animalrelations", :force => true do |t|
     t.integer  "animal_id"
@@ -30,6 +30,20 @@ ActiveRecord::Schema.define(:version => 20120905191657) do
     t.datetime "updated_at", :null => false
     t.integer  "father_id"
     t.integer  "mother_id"
+  end
+
+  create_table "animals_messages", :force => true do |t|
+    t.integer "animal_id"
+    t.integer "message_id"
+  end
+
+  create_table "messages", :force => true do |t|
+    t.text     "message"
+    t.date     "date_from"
+    t.date     "date_to"
+    t.integer  "category_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
 end
