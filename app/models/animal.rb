@@ -13,12 +13,8 @@ class Animal < ActiveRecord::Base
   
   private
     def update_parents
-      if @mother_id
-	self.mother = Animal.find(@mother_id)
-      end
-      if @father_id
-	self.father = Animal.find(@father_id)
-      end
+      self.mother = Animal.find(@mother_id) if @mother_id
+      self.father = Animal.find(@father_id) if @father_id
     end
     
 end
