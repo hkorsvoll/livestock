@@ -2,20 +2,20 @@
 
 <p>
   <b>Notat:</b>
-  <%= @message.message %>
+  <%= @note.note %>
 </p>
 
 <p>
   <b>Dato:</b>
-  <%= @message.date_from %>
+  <%= @note.date_from %>
 </p>
 
 <p>
   <b>Dyr notatet gjeld for:</b>
   <ul>
-  <% for animal in @message.animals %>
+  <% for animal in @note.animals %>
     <li><%= animal.id_tag %></li>
   <% end %>
   </ul>
-<%= link_to 'Edit', edit_message_path(@message) %> |
+<%= link_to 'Edit', edit_message_path(@note) %> |
 <%= link_to 'Back', messages_path %>

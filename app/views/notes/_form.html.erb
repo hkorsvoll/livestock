@@ -1,5 +1,5 @@
-<%= form_for(@message, :html => { :class => "ym-form ym-columnar"}) do |f| %>
-  <% if @message.errors.any? %>
+<%= form_for(@note, :html => { :class => "ym-form ym-columnar"}) do |f| %>
+  <% if @note.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@animal.errors.count, "error") %> prohibited this animal from being saved:</h2>
 
@@ -13,7 +13,7 @@
 
   <div class="field ym-fbox-text">
     <%= f.label :Notat %>
-    <%= f.text_area :message, :rows => "10" %>
+    <%= f.text_area :note, :rows => "10" %>
   </div>
   <div class="field ym-fbox-select">
     <%= f.label :Dato %>
@@ -23,7 +23,7 @@
   <p>
     <% for animal in Animal.find(:all) %>
       <div>
-	<%= check_box_tag "message[animal_ids][]", animal.id, @message.animals.include?(animal) %>
+	<%= check_box_tag "message[animal_ids][]", animal.id, @note.animals.include?(animal) %>
 	<%= animal.id_tag %>
       </div>
     <% end %>

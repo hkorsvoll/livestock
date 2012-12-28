@@ -1,7 +1,11 @@
 Livestock::Application.routes.draw do
-  resources :messages
-
+  resources :notes
   resources :animals
+
+  root  to: 'static_pages#home'
+  get       "static_pages/home"
+  match '/help' => 'static_pages#help'
+  match '/about' => 'static_pages#about'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
