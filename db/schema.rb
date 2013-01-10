@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121228110648) do
+ActiveRecord::Schema.define(:version => 20121230141807) do
 
   create_table "animalrelations", :force => true do |t|
     t.integer  "animal_id"
@@ -34,9 +34,9 @@ ActiveRecord::Schema.define(:version => 20121228110648) do
     t.integer  "owner_id"
   end
 
-  create_table "animals_messages", :force => true do |t|
+  create_table "animals_notes", :force => true do |t|
     t.integer "animal_id"
-    t.integer "message_id"
+    t.integer "note_id"
   end
 
   create_table "categories", :force => true do |t|

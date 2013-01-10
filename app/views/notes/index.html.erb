@@ -11,19 +11,19 @@
     <th></th>
   </tr>
 
-<% @notes.each do |message| %>
+<% @notes.each do |n| %>
   <tr>
-    <td><%= message.note %></td>
-    <td><%= message.date_from %></td>
-    <td><%= message.date_to %></td>
-    <td><%= message.category_id %></td>
-    <td><%= link_to 'Show', message %></td>
-    <td><%= link_to 'Edit', edit_message_path(message) %></td>
-    <td><%= link_to 'Destroy', message, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+    <td><%= n.note %></td>
+    <td><%= n.date_from %></td>
+    <td><%= n.date_to %></td>
+    <td><%= n.category_id %></td>
+    <td><%= link_to 'Show', n %></td>
+    <td><%= link_to 'Edit', edit_message_path(n) %></td>
+    <td><%= link_to 'Destroy', n, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Message', new_message_path %>
+<%= link_to 'New Message', new_note_path %>

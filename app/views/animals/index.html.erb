@@ -1,5 +1,5 @@
-<div class="ym-grid">
-  <div class="ym-g50 ym-gl">
+<div class="row">
+  <div id="animal-list"  class="span6">
     <h1>Husdyroversikt</h1>
 
     <table>
@@ -12,7 +12,7 @@
 	<th></th>
 	<th></th>
       </tr>
-
+    <%= will_paginate %>
     <% @animals.each do |animal| %>
       <tr>
 	<td><%= animal.id_tag %></td>
@@ -25,11 +25,12 @@
       </tr>
     <% end %>
     </table>
+    <%= will_paginate %>
 
     <br />
 
-    <%= link_to 'Nytt dyr', new_animal_path, :remote=>true, :class=>'new_animal' %>
+    <%= link_to 'Nytt dyr', new_animal_path, :remote=>true, :class=>'new_animal btn btn-large btn-primary' %>
   </div>
-  <div id="display-details" class="ym-g50 ym-gl">
+  <div id="display-details" class="span6">
   </div>
 </div>

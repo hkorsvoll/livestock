@@ -1,10 +1,10 @@
-<div class="livestock-show-animal">
+<div id="livestock-show-animal">
   <% if @animal.sex = "female" %>
     <h1>Søye <%= @animal.id_tag %></h1>
   <% else %>
     <h1>Vær <%= @animal.id_tag %></h1>
   <% end %>
-  <p id="notice"><%= notice %></p>
+  <p class="notice"><%= notice %></p>
 
   <p>
     <b>Namn:</b>
@@ -60,6 +60,6 @@
     </table>
   </p>
 
-  <%= link_to 'Edit', edit_animal_path(@animal), :remote=>true, :class=>'edit_animal' %> |
-  <%= link_to 'Back', animals_path %>
+  <%= link_to 'Rediger', edit_animal_path(@animal), :remote=>true, :class=>"edit_animal btn btn-large btn-primary"  %> |
+  <%= link_to 'Tilbake', animals_path, class: "btn btn-large btn-primary"  %>
 </div>

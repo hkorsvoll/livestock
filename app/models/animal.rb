@@ -25,11 +25,18 @@ class Animal < ActiveRecord::Base
   belongs_to :father, :class_name => 'Animal'#, :foreign_key => 'father_id'
   has_many :children, :class_name => 'Animal', :foreign_key => 'mother_id'
   has_and_belongs_to_many :notes
-#  accepts_nested_attributes_for :mother, :father#, :mother_id, :father_id
-#  attr_writer :mother_id, :father_id
 
+  def females
+    Animal.where("sex = 'female'")
+  end
+
+  def males
+    Animal.where("sex = 'male'")
+  end
+
+  validates :id_tag, presence: true
+  validates :sex, presence: true
   validates :birth_date, presence: true
-  validates :sex, :presence => true
   validate :validate_birth_date
 
   before_validation :update_parents

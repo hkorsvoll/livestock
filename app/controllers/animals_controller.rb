@@ -2,7 +2,7 @@ class AnimalsController < ApplicationController
   # GET /animals
   # GET /animals.json
   def index
-    @animals = Animal.all
+    @animals = Animal.paginate(page: params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,7 +17,7 @@ class AnimalsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render :json => @animal }
+#      format.json { render :json => @animal }
       format.js
     end
   end
@@ -26,8 +26,6 @@ class AnimalsController < ApplicationController
   # GET /animals/new.json
   def new
     @animal = Animal.new
-    @male_animals = Animal.where("sex = 'male'")
-    @female_animals = Animal.where("sex = 'female'")
     respond_to do |format|
       format.js
       format.html # new.html.erb
