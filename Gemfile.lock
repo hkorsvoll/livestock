@@ -122,6 +122,8 @@ GEM
       activesupport (= 3.2.9)
       bundler (~> 1.0)
       railties (= 3.2.9)
+    rails-i18n (0.7.2)
+      i18n (~> 0.5)
     railties (3.2.9)
       actionpack (= 3.2.9)
       activesupport (= 3.2.9)
@@ -216,6 +218,7 @@ DEPENDENCIES
   libnotify (= 0.5.9)
   pg (= 0.12.2)
   rails (= 3.2.9)
+  rails-i18n
   rb-inotify (= 0.8.8)
   rspec-rails (= 2.11.0)
   sass-rails (= 3.2.5)

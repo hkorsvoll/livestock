@@ -13,7 +13,7 @@ gem 'simple_form',              '2.0.2'
 gem 'uuidtools',                '2.1.3'
 gem 'taps',                     '0.3.24'
 gem 'json',                     '1.7.5'
-
+gem 'rails-i18n'
 
 group :development, :test do
   gem 'sqlite3',      '1.3.5'
