@@ -39,18 +39,18 @@
   <div class="control-group">
     <%= f.label :Mor, class: "control-label" %>
     <div class="controls">
-        <%= f.collection_select(:mother_id, @animal.females, :id, :name, {:prompt => true}) %>
+        <%= f.collection_select(:mother_id, @animal.all_females, :id, :name, {:prompt => true}) %>
     </div>
  </div>
  <div class="control-group">
    <%= f.label :Far, class: "control-label" %>
    <div class="controls">
-      <%= f.collection_select(:father_id, @animal.males, :id, :name, {:prompt => true}) %>
+      <%= f.collection_select(:father_id, @animal.all_males, :id, :name, {:prompt => true}) %>
    </div>
  </div>
 
   <div class="actions">
     <%= f.submit "Lagre", class: "btn btn-large btn-primary" %>
-    <%= link_to 'Avbryt', animals_path, class: "btn btn-large btn-primary" %>
+    <%= link_to 'Lukk', animals_path, class: "btn btn-large btn-primary" %>
   </div>
 <% end %>

@@ -1,8 +1,10 @@
+# encoding: UTF-8
 require "spec_helper"
 
 describe "Animal pages" do
   subject { page }
   describe "index" do
+    let(:user) {FactoryGirl.create(:user)}
     let(:animal) {FactoryGirl.create(:animal)}
     before(:each) do
       visit animals_path
@@ -39,6 +41,21 @@ describe "Animal pages" do
     describe "error message" do
       before {click_button "Lagre"}
       it {should have_content("error")}
+    end
+
+    describe "with valid information" do
+      before do
+        fill_in 'animal_id_tag', with: "101"
+        fill_in 'animal_name',   with: "Sau 101"
+        select '2012',    from: 'animal_birth_date_1i'
+        select 'april',   from: 'animal_birth_date_2i'
+        select '20',      from: 'animal_birth_date_3i'
+        select 'Female',  from: 'animal_sex'
+      end
+
+      it "should create an animal" do
+        expect { click_button "Lagre" }.to change(Animal, :count).by(1)
+      end
     end
 
   end

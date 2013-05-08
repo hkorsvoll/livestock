@@ -60,6 +60,7 @@
     </table>
   </p>
 
-  <%= link_to 'Rediger', edit_animal_path(@animal), :remote=>true, :class=>"edit_animal btn btn-large btn-primary"  %> |
-  <%= link_to 'Tilbake', animals_path, class: "btn btn-large btn-primary"  %>
+  <%= link_to 'Legg til paringsdato', new_mating_path(@animal), :class=>"edit_animal btn btn-large btn-primary" %>
+  <%= link_to 'Rediger', edit_animal_path(@animal), :remote=>true, :class=>"edit_animal btn btn-large btn-primary"  %>
+  <%= link_to 'Lukk', animals_path, class: "btn btn-large btn-primary"  %>
 </div>

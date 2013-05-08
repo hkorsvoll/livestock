@@ -1,6 +1,18 @@
 Livestock::Application.routes.draw do
+  get "sessions/new"
+
+  get "sessions/create"
+
+  get "sessions/destroy"
+
+  get "mating/new"
+
+  get "mating/delete"
+
   resources :notes
   resources :animals
+  resources :users
+  resources :owners
 
   root  to: 'static_pages#home'
   get       "static_pages/home"

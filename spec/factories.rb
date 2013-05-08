@@ -4,11 +4,18 @@ FactoryGirl.define do
     sequence(:id_tag) { |n| "#{n}"}
     sex "female"
     birth_date Date.today
+    owner
   end
 
   factory :owner do
     sequence(:name) { |n| "Owner #{n}"}
     sequence(:email)  { |n| "person_#{n}@example.com" }
     sequence(:pnum) { |n| (11223312345 + n).to_s}
+  end
+
+  factory :user do
+    sequence(:name) { |n| "Brukar #{n}"}
+    sequence(:email)  { |n| "person_#{n}@example.com" }
+    owner
   end
 end

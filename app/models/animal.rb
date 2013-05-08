@@ -25,13 +25,28 @@ class Animal < ActiveRecord::Base
   belongs_to :father, :class_name => 'Animal'#, :foreign_key => 'father_id'
   has_many :children, :class_name => 'Animal', :foreign_key => 'mother_id'
   has_and_belongs_to_many :notes
+  has_many :matings
 
-  def females
-    Animal.where("sex = 'female'")
+  def all_living
+    Animal.where(death_date: nil)
   end
 
-  def males
-    Animal.where("sex = 'male'")
+  def all_females
+    Animal.where(sex: 'female', death_date: nil)
+  end
+
+  def all_males
+    Animal.where(sex: 'male', death_date: nil)
+  end
+
+  def year
+    birth_date.year
+  end
+
+  def add_mating(date, uncertainty = 1)
+    if sex.eql?(:female) then
+      matings.create(mating_date: date, uncertainty: uncertainty)
+    end
   end
 
   validates :id_tag, presence: true

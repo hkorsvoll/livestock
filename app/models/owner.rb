@@ -16,7 +16,21 @@ class Owner < ActiveRecord::Base
 
   has_many :animals
   has_many :notes
+  has_many :users
 
   validates :email, :presence => true
   validates :name, :presence => true
+
+  def living_animals
+    animals.where(death_date: nil)
+  end
+
+  def female_animals
+    living_animals.where(sex: 'female')
+  end
+
+  def male_animals
+    living_animals.where(sex: 'male')
+  end
+
 end

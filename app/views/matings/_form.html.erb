@@ -1,0 +1,25 @@
+<%= form_for(@mating, :html => { :class => "form-horizontal"} ) do |f| %>
+    <% if @mating.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@mating.errors.count, "error") %> hindra denne parringa å bli lagra:</h2>
+
+          <ul>
+            <% @amating.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <div class="control-group">
+      <%= f.label :Parringsdato, class: "control-label" %>
+      <div class="controls">
+        <%= f.date_select :mating_date, {}, { :style => "width: 23%" } %>
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Lagre", class: "btn btn-large btn-primary" %>
+      <%= link_to 'Lukk', animals_path, class: "btn btn-large btn-primary" %>
+    </div>
+
+<% end %>

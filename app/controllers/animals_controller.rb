@@ -2,7 +2,14 @@ class AnimalsController < ApplicationController
   # GET /animals
   # GET /animals.json
   def index
-    @animals = Animal.paginate(page: params[:page])
+    start_year = Date.parse('1.1.1970')
+    end_year = Date.today
+    if params[:year] then
+      start_year = Date.parse('1.1.' + params[:year])
+      end_year = Date.parse('31.12.' + params[:year])
+    end
+    @animals = Animal.where("birth_date >= ? and birth_date <= ?",
+                            start_year,end_year).paginate(page: params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,8 +24,8 @@ class AnimalsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-#      format.json { render :json => @animal }
       format.js
+      format.json { render :json => @animal }
     end
   end
 
@@ -36,8 +43,8 @@ class AnimalsController < ApplicationController
   # GET /animals/1/edit
   def edit
     @animal = Animal.find(params[:id])
-    @male_animals = Animal.where("sex = 'male'")
-    @female_animals = Animal.where("sex = 'female'")
+    @male_animals = Animal.all_males
+    @female_animals = Animal.all_females
     respond_to do |format|
       format.html
       format.js

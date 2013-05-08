@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121230141807) do
+ActiveRecord::Schema.define(:version => 20130430213109) do
 
   create_table "animalrelations", :force => true do |t|
     t.integer  "animal_id"
@@ -45,6 +45,16 @@ ActiveRecord::Schema.define(:version => 20121230141807) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "matings", :force => true do |t|
+    t.integer  "animal_id"
+    t.date     "mating_date"
+    t.integer  "uncertainty"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "matings", ["animal_id"], :name => "index_matings_on_animal_id"
+
   create_table "notes", :force => true do |t|
     t.text     "content"
     t.date     "date_from"
@@ -62,6 +72,17 @@ ActiveRecord::Schema.define(:version => 20121230141807) do
     t.datetime "updated_at", :null => false
     t.string   "pnum"
     t.string   "orgnum"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.integer  "owner_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "password_digest"
+    t.string   "remember_token"
+    t.boolean  "admin"
   end
 
 end

@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: messages
+# Table name: notes
 #
 #  id          :integer          not null, primary key
 #  content     :text

@@ -18,11 +18,11 @@
 require "spec_helper"
 
 describe Animal do
-  let(:owner) {FactoryGirl.create(:owner)}
+  let(:myowner) {FactoryGirl.create(:owner)}
 
   before do
-    @animal_1 = owner.animals.new( id_tag:     "113",
-                                   birth_date: Date.today,
+    @animal_1 = myowner.animals.new( id_tag:     "113",
+                                   birth_date: Date.today - 1.year,
                                    sex:        "female")
   end
 
@@ -67,7 +67,7 @@ describe Animal do
   describe "accessible attributes" do
     it "should not allow access to owner_id" do
       expect do
-        Animal.new(owner_id: owner.id)
+        Animal.new(owner_id: myowner.id)
       end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
     end
   end
