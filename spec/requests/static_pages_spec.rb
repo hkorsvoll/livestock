@@ -7,6 +7,18 @@ describe "Static Pages" do
     it {should have_selector('h1', text: 'husdyrdatabasen')}
     it {should have_link('Om', href: about_path)}
     it {should have_link('Hjelp', href: help_path)}
+
+    describe "for signed-in users" do
+      let(:user) { FactoryGirl.create(:user)}
+      before do
+        sign_in user
+        visit root_path
+      end
+
+      describe "should render sign out link" do
+        it {should have_link('Logg ut', href: signout_path)}
+      end
+    end
   end
 
   describe "Help page" do

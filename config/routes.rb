@@ -1,23 +1,19 @@
 Livestock::Application.routes.draw do
-  get "sessions/new"
-
-  get "sessions/create"
-
-  get "sessions/destroy"
-
-  get "mating/new"
-
-  get "mating/delete"
 
   resources :notes
   resources :animals
   resources :users
   resources :owners
+  resources :matings,     only: [:new, :create, :destroy]
+  resources :sessions,    only: [:new, :create, :destroy]
 
   root  to: 'static_pages#home'
   get       "static_pages/home"
-  match '/help' => 'static_pages#help'
-  match '/about' => 'static_pages#about'
+  match '/help'    => 'static_pages#help'
+  match '/about'   => 'static_pages#about'
+  match '/signup'  => 'users#new'
+  match '/signin'  => 'sessions#new'
+  match '/signout' => 'sessions#destroy', via: :delete
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
