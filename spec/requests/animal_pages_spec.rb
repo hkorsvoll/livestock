@@ -7,6 +7,7 @@ describe "Animal pages" do
     let(:user) {FactoryGirl.create(:user)}
     let(:animal) {FactoryGirl.create(:animal)}
     before(:each) do
+      sign_in user
       visit animals_path
     end
     it {should have_link('Nytt dyr',href: new_animal_path)}
