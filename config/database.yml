@@ -41,7 +41,7 @@ test:
 #   pool: 5
 #   timeout: 5000
 
-test:
+production:
   adapter: postgresql
   encoding: unicode
   database: livestock_prod
