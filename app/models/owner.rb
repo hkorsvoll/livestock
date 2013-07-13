@@ -16,7 +16,7 @@ class Owner < ActiveRecord::Base
 
   has_many :animals
   has_many :notes
-  has_many :users
+  has_and_belongs_to_many :users
 
   validates :email, :presence => true
   validates :name, :presence => true

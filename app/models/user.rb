@@ -5,7 +5,6 @@
 #  id              :integer          not null, primary key
 #  name            :string(255)
 #  email           :string(255)
-#  owner_id        :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  password_digest :string(255)
@@ -17,7 +16,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :name, :password, :password_confirmation
   has_secure_password
 
-  belongs_to :owner
+  has_and_belongs_to_many :owners
 
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token

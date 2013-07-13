@@ -27,6 +27,7 @@ describe Owner do
   it { should respond_to(:email)}
   it { should respond_to(:pnum)}
   it { should respond_to(:orgnum)}
+  it { should respond_to(:users)}
 
   it { should be_valid }
 

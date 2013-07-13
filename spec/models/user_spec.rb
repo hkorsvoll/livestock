@@ -5,7 +5,6 @@
 #  id              :integer          not null, primary key
 #  name            :string(255)
 #  email           :string(255)
-#  owner_id        :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  password_digest :string(255)
@@ -25,11 +24,12 @@ describe User do
   it { should respond_to(:name)}
   it { should respond_to(:email)}
   it { should respond_to(:password_digest) }
-  it { should respond_to{:password}}
-  it { should respond_to{:password_confirmation}}
-  it { should respond_to{:remember_token}}
-  it { should respond_to{:admin}}
-  it { should respond_to{:authenticate}}
+  it { should respond_to(:password)}
+  it { should respond_to(:password_confirmation)}
+  it { should respond_to(:remember_token)}
+  it { should respond_to(:admin)}
+  it { should respond_to(:authenticate)}
+  it { should respond_to(:owners)}
 
   it { should be_valid }
   it { should_not be_admin }
@@ -142,6 +142,21 @@ describe User do
       expect do
         User.new(admin: true)
       end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
+    end
+  end
+
+  begin
+    describe "owner association" do
+      let!(:owner1) do
+        FactoryGirl.create(:owner)
+      end
+      before do
+        @user.owners << owner1
+        @user.save
+      end
+      it "should be associated with one owner" do
+        @user.owners.count == 1
+      end
     end
   end
 
