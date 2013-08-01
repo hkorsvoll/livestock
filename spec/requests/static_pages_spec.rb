@@ -18,6 +18,10 @@ describe "Static Pages" do
       describe "should render sign out link" do
         it {should have_link('Logg ut', href: signout_path)}
       end
+
+      describe "should render name of the current user" do
+        it {should have_selector('li', text: user.name)}
+      end
     end
   end
 
