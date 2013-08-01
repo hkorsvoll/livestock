@@ -33,4 +33,15 @@ class Owner < ActiveRecord::Base
     living_animals.where(sex: 'male')
   end
 
+  def user
+    users.first
+  end
+
+  def set_user(user)
+    users.delete(user)
+    other_users = users.all
+    users.delete_all
+    users << user
+    users << other_users
+  end
 end

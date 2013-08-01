@@ -27,6 +27,18 @@ class User < ActiveRecord::Base
   validates :password, :presence => true, :length => { :minimum => 6 }
   validates :password_confirmation, :presence => true
 
+  def owner
+    owners.first
+  end
+
+  def set_owner(owner)
+    owners.delete(owner)
+    other_owners = owners.all
+    owners.delete_all
+    owners << owner
+    owners << other_owners
+  end
+
   private
   def create_remember_token
     self.remember_token = SecureRandom.urlsafe_base64

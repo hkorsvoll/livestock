@@ -23,13 +23,14 @@ describe User do
 
   it { should respond_to(:name)}
   it { should respond_to(:email)}
-  it { should respond_to(:password_digest) }
+  it { should respond_to(:password_digest)}
   it { should respond_to(:password)}
   it { should respond_to(:password_confirmation)}
   it { should respond_to(:remember_token)}
   it { should respond_to(:admin)}
   it { should respond_to(:authenticate)}
   it { should respond_to(:owners)}
+  it { should respond_to(:owner)}
 
   it { should be_valid }
   it { should_not be_admin }
@@ -147,17 +148,25 @@ describe User do
 
   begin
     describe "owner association" do
-      let!(:owner1) do
-        FactoryGirl.create(:owner)
-      end
-      before do
-        @user.owners << owner1
-        @user.save
-      end
-      it "should be associated with one owner" do
-        @user.owners.count == 1
+      let!(:owner1) { FactoryGirl.create(:owner, users: [@user]) }
+      it("should be associated with one owner") { @user.owners.count.should == 1 }
+      specify("should owner have one user") { owner1.users.count.should == 1 }
+      describe "when adding a second owner" do
+        let!(:owner2) { FactoryGirl.create(:owner, users: [@user]) }
+        it("should have two owners") { @user.owners.count.should == 2 }
+        its(:owner) {should eq owner1}
+        describe "and set owner to the second owner" do
+          before {@user.set_owner(owner2)}
+          its(:owner) {should eq owner2 }
+          it("should still have two owners") { @user.owners.count.should == 2 }
+        end
+        describe "and set owner as third owner" do
+          let!(:owner3) { FactoryGirl.create(:owner) }
+          before {@user.set_owner(owner3)}
+          its(:owner) {should eq owner3}
+          it("should have three owner") { @user.owners.count.should == 3}
+        end
       end
     end
   end
-
 end
