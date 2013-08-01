@@ -1,4 +1,5 @@
 class AnimalsController < ApplicationController
+  before_filter :signed_in_user
   # GET /animals
   # GET /animals.json
   def index
@@ -8,7 +9,8 @@ class AnimalsController < ApplicationController
       start_year = Date.parse('1.1.' + params[:year])
       end_year = Date.parse('31.12.' + params[:year])
     end
-    @animals = Animal.where("birth_date >= ? and birth_date <= ?",
+
+    @animals = current_user.owners.first.animals.where("birth_date >= ? and birth_date <= ?",
                             start_year,end_year).paginate(page: params[:page])
 
     respond_to do |format|
@@ -33,6 +35,7 @@ class AnimalsController < ApplicationController
   # GET /animals/new.json
   def new
     @animal = Animal.new
+    @animal.owner = current_user.owners.first
     respond_to do |format|
       format.js
       format.html # new.html.erb
@@ -55,6 +58,7 @@ class AnimalsController < ApplicationController
   # POST /animals.json
   def create
     @animal = Animal.new(params[:animal])
+    @animal.owner = current_user.owners.first
 
     respond_to do |format|
       if @animal.save

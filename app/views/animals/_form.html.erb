@@ -39,13 +39,13 @@
   <div class="control-group">
     <%= f.label :Mor, class: "control-label" %>
     <div class="controls">
-        <%= f.collection_select(:mother_id, @animal.all_females, :id, :name, {:prompt => true}) %>
+        <%= f.collection_select(:mother_id, @animal.owner.female_animals, :id, :name, {:prompt => true}) %>
     </div>
  </div>
  <div class="control-group">
    <%= f.label :Far, class: "control-label" %>
    <div class="controls">
-      <%= f.collection_select(:father_id, @animal.all_males, :id, :name, {:prompt => true}) %>
+      <%= f.collection_select(:father_id, @animal.owner.male_animals, :id, :name, {:prompt => true}) %>
    </div>
  </div>
 

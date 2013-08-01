@@ -2,33 +2,50 @@
 require "spec_helper"
 
 describe "Animal pages" do
+  let(:myowner) {FactoryGirl.create(:owner)}
+  let(:myuser) {FactoryGirl.create(:user, owners:[myowner])}
+
   subject { page }
-  describe "index" do
-    let(:user) {FactoryGirl.create(:user)}
-    let(:animal) {FactoryGirl.create(:animal)}
-    before(:each) do
-      sign_in user
-      visit animals_path
-    end
-    it {should have_link('Nytt dyr',href: new_animal_path)}
+  describe "Index page" do
+    before {visit animals_path}
 
-    describe "pagination" do
-      before(:all) { 50.times {FactoryGirl.create(:animal)}}
-      after(:all) { Animal.delete_all }
+    it { should have_selector('div.alert-notice', text: 'Please sign in')}
 
-      it { should have_selector('div.pagination') }
+    describe "with signed in user" do
+      before(:each) do
+        sign_in myuser
+        visit animals_path
+      end
+      it {should have_link('Nytt dyr',href: new_animal_path)}
 
-      it "should list each animal" do
-        Animal.paginate(page: 1).each do |animal|
-          page.should have_selector('td', text: animal.id_tag)
+      describe "pagination" do
+        before {
+          50.times { FactoryGirl.create(:animal, owner: myowner) }
+          visit animals_path
+        }
+
+        specify "user should have access to 50 animals" do
+          myuser.owners.first.animals.count.should == 50
+        end
+
+        specify "User should have one owner" do
+          myuser.owners.count.should == 1
+        end
+
+        it { should have_selector('div.pagination') }
+
+        it "should list each animal" do
+          myowner.animals.paginate(page: 1).each do |animal|
+            page.should have_selector('td', text: animal.id_tag)
+          end
         end
       end
     end
   end
 
   describe "animal creation" do
-    let(:animal) {FactoryGirl.create(:animal)}
     before do
+      sign_in myuser
       visit animals_path
       click_link "Nytt dyr"
     end
@@ -49,7 +66,7 @@ describe "Animal pages" do
         fill_in 'animal_id_tag', with: "101"
         fill_in 'animal_name',   with: "Sau 101"
         select '2012',    from: 'animal_birth_date_1i'
-        select 'april',   from: 'animal_birth_date_2i'
+        select 'April',   from: 'animal_birth_date_2i'
         select '20',      from: 'animal_birth_date_3i'
         select 'Female',  from: 'animal_sex'
       end

@@ -27,18 +27,6 @@ class Animal < ActiveRecord::Base
   has_and_belongs_to_many :notes
   has_many :matings
 
-  def all_living
-    Animal.where(death_date: nil)
-  end
-
-  def all_females
-    Animal.where(sex: 'female', death_date: nil)
-  end
-
-  def all_males
-    Animal.where(sex: 'male', death_date: nil)
-  end
-
   def year
     birth_date.year
   end
