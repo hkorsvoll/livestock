@@ -1,11 +1,29 @@
 namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
-    make_owners
+    clear_all_data
+    setup_users_and_owners
     make_animals
   end
 end
 
+def clear_all_data
+  Owner.delete_all
+  User.delete_all
+  Animal.delete_all
+  Note.delete_all
+  Mating.delete_all
+  Animalrelation.delete_all
+end
+
+def setup_users_and_owners
+  make_owners
+  make_users
+  owner1 = Owner.first
+  user1 = User.first
+  owner1.users << user1
+  owner1.save
+end
 def make_owners
   Owner.create( name: "Owner 1",
                 email: "example@mail.com",
@@ -14,6 +32,13 @@ def make_owners
   Owner.create( name: "Owner 2",
                 email: "example2@mail.com",
                 pnum: "01011011413")
+end
+
+def make_users
+  User.create( name: "Havard Korsvoll",
+               email: "korsvoll@gmail.com",
+               password: "passord",
+               password_confirmation: "passord" )
 end
 
 def make_animals
