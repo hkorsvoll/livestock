@@ -2,49 +2,62 @@
 require "spec_helper"
 
 describe "Animal pages" do
+  let(:myuser) {FactoryGirl.create(:user)}
   let(:myowner) {FactoryGirl.create(:owner)}
-  let(:myuser) {FactoryGirl.create(:user, owners:[myowner])}
 
   subject { page }
-  describe "Index page" do
+  describe "index page without logging in" do
     before {visit animals_path}
 
     it { should have_selector('div.alert-notice', text: 'Please sign in')}
+  end
 
-    describe "with signed in user" do
-      before(:each) do
-        sign_in myuser
+  describe "index page logged in with user that have no owner" do
+    before do
+      sign_in myuser
+      visit animals_path
+    end
+
+    it {should have_selector('h1', text: 'No owner')}
+  end
+
+  describe "index page with signed in user and assosiated owner" do
+    before do
+      myuser.set_owner(myowner)
+      sign_in myuser
+      visit animals_path
+    end
+
+    it {should have_link('Nytt dyr',href: new_animal_path)}
+
+    describe "pagination" do
+      before {
+        50.times { FactoryGirl.create(:animal, owner: myowner) }
         visit animals_path
+      }
+
+      specify "user should have access to 50 animals" do
+        myuser.owners.first.animals.count.should == 50
       end
-      it {should have_link('Nytt dyr',href: new_animal_path)}
 
-      describe "pagination" do
-        before {
-          50.times { FactoryGirl.create(:animal, owner: myowner) }
-          visit animals_path
-        }
+      specify "User should have one owner" do
+        myuser.owners.count.should == 1
+      end
 
-        specify "user should have access to 50 animals" do
-          myuser.owners.first.animals.count.should == 50
-        end
+      it { should have_selector('div.pagination') }
 
-        specify "User should have one owner" do
-          myuser.owners.count.should == 1
-        end
-
-        it { should have_selector('div.pagination') }
-
-        it "should list each animal" do
-          myowner.animals.paginate(page: 1).each do |animal|
-            page.should have_selector('td', text: animal.id_tag)
-          end
+      it "should list each animal" do
+        myowner.animals.paginate(page: 1).each do |animal|
+          page.should have_selector('td', text: animal.id_tag)
         end
       end
     end
   end
 
+
   describe "animal creation" do
     before do
+      myuser.set_owner(myowner)
       sign_in myuser
       visit animals_path
       click_link "Nytt dyr"

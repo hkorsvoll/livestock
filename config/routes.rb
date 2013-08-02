@@ -11,6 +11,7 @@ Livestock::Application.routes.draw do
   get       "static_pages/home"
   match '/help'    => 'static_pages#help'
   match '/about'   => 'static_pages#about'
+  match '/no_owner'=> 'static_pages#no_owner'
   match '/signup'  => 'users#new'
   match '/signin'  => 'sessions#new'
   match '/signout' => 'sessions#destroy', via: :delete

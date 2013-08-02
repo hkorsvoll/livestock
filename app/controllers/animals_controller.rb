@@ -1,5 +1,6 @@
 class AnimalsController < ApplicationController
-  before_filter :signed_in_user
+  include AnimalsHelper
+  before_filter :signed_in_user, :current_user_has_owner
   # GET /animals
   # GET /animals.json
   def index
