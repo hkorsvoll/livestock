@@ -1,0 +1,25 @@
+<%= provide(:title, 'All owners') %>
+<h1>Registered owners in database</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% @owners.each do |owner| %>
+  <tr>
+    <td><%= owner.name %></td>
+    <td><%= owner.email %></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><%= link_to 'Show', owner, class: 'btn' %></td>
+    <td><%= link_to 'Edit', edit_owner_path(owner), class: 'btn' %></td>
+    <td><%= link_to 'Delete', owner, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn' %></td>
+  </tr>
+  <% end %>
+</table>
+<br />
+<%= link_to 'New Owner', new_animal_path, :class=>'new_owner btn btn-large btn-primary' %>

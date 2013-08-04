@@ -1,4 +1,5 @@
 module AnimalsHelper
+  include UsersHelper
   def add_matingdate(animal)
   end
 
@@ -8,7 +9,4 @@ module AnimalsHelper
     end
   end
 
-  def user_has_owner?(user)
-    !user.owner.nil?
-  end
 end

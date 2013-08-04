@@ -9,7 +9,7 @@
           <li><%= link_to "Husdyr", animals_path %></li>
           <li><%= link_to "Om", about_path %></li>
           <% if signed_in? %>
-            <li><%= link_to current_user.name, "#" %></li>
+            <li><%= link_to current_user.name, current_user  %></li>
             <li><%= link_to "Logg ut", signout_path, method: "delete" %></li>
           <% else %>
             <li><%= link_to "Logg inn" , signin_path %></li>

@@ -22,6 +22,11 @@ describe "Static Pages" do
       describe "should render name of the current user" do
         it {should have_selector('li', text: user.name)}
       end
+
+      describe "account page" do
+        before {click_link user.name}
+        it {should have_selector('h1', text: user.name)}
+      end
     end
   end
 
