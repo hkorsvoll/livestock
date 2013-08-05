@@ -43,7 +43,14 @@ class OwnersController < ApplicationController
   end
 
   def update
-
+    @owner = Owner.find(params[:id])
+    @owner.user = User.find(params[:user])
+    if @owner.update_attributes(params[:owner])
+      flash[:success] = "Owner updated"
+    else
+      flash[:error] = "Owner was not updated"
+    end
+    redirect_to @owner
   end
 
   def destroy

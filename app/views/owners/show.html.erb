@@ -1,2 +1,21 @@
-<h1>Owners#show</h1>
-<p>Find me in app/views/owners/show.html.erb</p>
+<h1><%= @owner.name %></h1>
+<ul>
+  <li>Email: <%= @owner.email %></li>
+  <li>OrgNum: <%= @owner.orgnum %></li>
+  <li>PNum: <%= @owner.pnum %></li>
+  <li>Total number of animals: <%= @owner.living_animals.count %></li>
+  <li>Users: <%= @owner.users.count %></li>
+  <ul>
+    <% @owner.users.each do |user| %>
+    <li><%=  user.name %>, <%= user.email %></li>
+    <% end %>
+  </ul>
+</ul>
+<%= link_to 'Edit', edit_owner_path(@owner), class: 'btn' %>
+<%= form_for(@owner) do |f| %>
+    <%= hidden_field_tag :user, current_user.id %>
+    <%= f.submit 'Assosiate owner '+@owner.name+' with user '+current_user.name, class: 'btn' %>
+<% end %>
+
+<!--<%= link_to 'Assosiate owner '+@owner.name+' with user '+current_user.name, '#', class: 'btn' %>
+-->

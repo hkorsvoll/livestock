@@ -44,4 +44,38 @@ describe "Owner pages" do
     end
   end
 
+  describe "with signed in user" do
+    before do
+      sign_in myuser
+      visit owner_path(myowner)
+    end
+    it { should have_selector('h1', text:myowner.name) }
+    it { should have_selector('li', text:myowner.email) }
+    it { should have_selector('li', text:myowner.pnum) }
+    it { should have_selector('li', text:myowner.orgnum) }
+    it { should have_selector('li', text:myowner.living_animals.count.to_s)}
+    it { should have_link('Edit', href: edit_owner_path(myowner))}
+
+    it "should create user assosiation" do
+      expect {click_button('Assosiate owner '+myowner.name+' with user '+myuser.name)}.to change(myowner.users, :count).by(1)
+    end
+  end
+
+  describe "when users are assosiated with owner" do
+    before {
+      FactoryGirl.create(:user, owner: @myowner)
+      myowner.user = myuser
+      sign_in myuser
+      visit owner_path(myowner)
+    }
+    specify "should have one user" do
+      myowner.users.count.should == 1
+    end
+    it "should list each user for owner" do
+      myowner.users.each do |user|
+        page.should have_selector('li', text: user.email)
+      end
+    end
+  end
+
 end

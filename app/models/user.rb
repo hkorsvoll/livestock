@@ -31,12 +31,18 @@ class User < ActiveRecord::Base
     owners.first
   end
 
+  def owner=(owner)
+    set_owner(owner)
+  end
+
   def set_owner(owner)
-    owners.delete(owner)
-    other_owners = owners.all
-    owners.delete_all
-    owners << owner
-    owners << other_owners
+    unless owner.nil?
+      owners.delete(owner)
+      other_owners = owners.all
+      owners.delete_all
+      owners << owner
+      owners << other_owners
+    end
   end
 
   private

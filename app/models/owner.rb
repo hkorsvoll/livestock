@@ -37,6 +37,10 @@ class Owner < ActiveRecord::Base
     users.first
   end
 
+  def user=(user)
+    set_user(user)
+  end
+
   def set_user(user)
     users.delete(user)
     other_users = users.all
