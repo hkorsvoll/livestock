@@ -1,3 +1,4 @@
+<% provide(:title, @owner.name) %>
 <h1><%= @owner.name %></h1>
 <ul>
   <li>Email: <%= @owner.email %></li>
@@ -11,11 +12,18 @@
     <% end %>
   </ul>
 </ul>
-<%= link_to 'Edit', edit_owner_path(@owner), class: 'btn' %>
+<%= link_to 'Edit', edit_owner_path(@owner), class: "btn btn-large btn-primary" %>
+<%= link_to 'Close', owners_path, class: "btn btn-large btn-primary" %>
+<br/>
+<br/>
 <%= form_for(@owner) do |f| %>
     <%= hidden_field_tag :user, current_user.id %>
-    <%= f.submit 'Assosiate owner '+@owner.name+' with user '+current_user.name, class: 'btn' %>
+    <% if @owner.users.exists?(current_user) %>
+        <%= hidden_field_tag :Add, false %>
+        <%= f.submit 'Remove me from this owner', class: "btn btn-large btn-primary" %>
+    <% else %>
+        <%= hidden_field_tag :Add, true %>
+        <%= f.submit 'Add me to this owner', class: "btn btn-large btn-primary" %>
+    <% end %>
 <% end %>
 
-<!--<%= link_to 'Assosiate owner '+@owner.name+' with user '+current_user.name, '#', class: 'btn' %>
--->

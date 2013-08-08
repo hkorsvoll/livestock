@@ -39,12 +39,19 @@ class OwnersController < ApplicationController
   end
 
   def edit
-
+    @owner = Owner.find(params[:id])
   end
 
   def update
     @owner = Owner.find(params[:id])
-    @owner.user = User.find(params[:user])
+    if User.exists?(params[:user])
+      @user = User.find(params[:user])
+      if params[:Add] == 'true'
+        @owner.user = @user
+      else
+        @owner.users.delete(@user)
+      end
+    end
     if @owner.update_attributes(params[:owner])
       flash[:success] = "Owner updated"
     else

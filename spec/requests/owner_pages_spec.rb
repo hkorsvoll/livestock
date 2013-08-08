@@ -20,7 +20,7 @@ describe "Owner pages" do
       it { should have_selector('div.alert-notice', text: 'No owner is assosiated with this user')}
       it { should have_selector('title', text: 'All owners') }
       it { should have_selector('h1',    text: 'Registered owners in database') }
-      it { should have_link('New Owner'), href:new_owner_path}
+      it { should have_link('New Owner', href: new_owner_path)}
     end
 
     describe "with a logged in user that has owner" do
@@ -44,7 +44,7 @@ describe "Owner pages" do
     end
   end
 
-  describe "with signed in user" do
+  describe "profile" do
     before do
       sign_in myuser
       visit owner_path(myowner)
@@ -55,26 +55,87 @@ describe "Owner pages" do
     it { should have_selector('li', text:myowner.orgnum) }
     it { should have_selector('li', text:myowner.living_animals.count.to_s)}
     it { should have_link('Edit', href: edit_owner_path(myowner))}
+    it { should have_link('Close', href: owners_path)}
 
-    it "should create user assosiation" do
-      expect {click_button('Assosiate owner '+myowner.name+' with user '+myuser.name)}.to change(myowner.users, :count).by(1)
+    describe "when logged in user is not assosiated with owner" do
+      it "should create user assosiation" do
+        expect {click_button('Add me to this owner')}.to change(myowner.users, :count).by(1)
+      end
+    end
+
+    describe "when logged in user is assosiated with owner" do
+      before do
+        myowner.user = myuser
+        visit owner_path(myowner)
+      end
+      it "should remove user assosiation" do
+        expect {click_button('Remove me from this owner')}.to change(myowner.users, :count).by(-1)
+      end
     end
   end
 
   describe "when users are assosiated with owner" do
     before {
-      FactoryGirl.create(:user, owner: @myowner)
-      myowner.user = myuser
+      3.times {FactoryGirl.create(:user, owner: myowner)}
+      myowner.set_user(myuser)
       sign_in myuser
       visit owner_path(myowner)
     }
-    specify "should have one user" do
-      myowner.users.count.should == 1
-    end
     it "should list each user for owner" do
       myowner.users.each do |user|
-        page.should have_selector('li', text: user.email)
+        page.should have_selector('li', text: user.name)
       end
+    end
+  end
+
+  describe "new" do
+    before do
+      sign_in myuser
+      visit new_owner_path
+    end
+
+    let(:submit) {"Create Owner"}
+
+    describe "with invalid information" do
+      it "should not create an owner" do
+        expect {click_button submit}.not_to change(Owner, :count)
+      end
+
+      describe "after submission" do
+        before {click_button submit}
+
+        it{should have_selector('title', Text: 'Create Owner')}
+        it{should have_content('error')}
+      end
+    end
+
+    describe "with valid information" do
+      before do
+        fill_in "Name",   with: "Example Owner"
+        fill_in "Email",  with: "owner@example.com"
+      end
+      it "should create an owner" do
+        expect {click_button submit}.to change(Owner, :count).by(1)
+      end
+      describe "after saving the owner" do
+        before { click_button submit }
+        let(:owner) { Owner.find_by_email('owner@example.com') }
+
+        it { should have_selector('title', text: owner.name) }
+        it { should have_selector('div.alert.alert-success', text: 'Owner created') }
+      end
+    end
+  end
+
+  describe "edit" do
+    before do
+      sign_in myuser
+      visit edit_owner_path(myowner)
+    end
+
+    let(:submit) {"Update Owner"}
+    describe "page" do
+      it{should have_selector('title', Text: 'Edit '+myowner.name)}
     end
   end
 

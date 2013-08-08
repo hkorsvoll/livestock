@@ -5,6 +5,16 @@
       <h1>
         <%= @user.name %>
       </h1>
+      <ul>
+        <li>E-mail: <%= @user.email %></li>
+      </ul>
     </section>
+    <section>
+      <% if @user.owners.any? %>
+        <h3>Assosiated owner</h3>
+        <%= link_to(@user.owner.name, owner_path(@user.owner)) %>
+      <% end %>
+    </section>
+    <%= link_to('Edit', edit_user_path, class: 'btn btn-large btn-primary') %>
   </aside>
 </div>
