@@ -11,6 +11,8 @@ FactoryGirl.define do
     sequence(:name) { |n| "Owner #{n}"}
     sequence(:email)  { |n| "person_#{n}@example.com" }
     sequence(:pnum) { |n| (11223312345 + n).to_s}
+    sequence(:orgnum) {|n| (1111357492 +n).to_s}
+    sequence(:prodnum) {|n| (1329264 +n).to_s}
   end
 
   factory :user do

@@ -5,14 +5,15 @@
 #  id         :integer          not null, primary key
 #  name       :string(255)
 #  email      :string(255)
-#  pnum       :string(255)
-#  orgnum     :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  pnum       :string(255)
+#  orgnum     :string(255)
+#  prodnum    :string(255)
 #
 
 class Owner < ActiveRecord::Base
-  attr_accessible :email, :name, :pnum, :orgnum
+  attr_accessible :email, :name, :pnum, :orgnum, :prodnum
 
   has_many :animals
   has_many :notes

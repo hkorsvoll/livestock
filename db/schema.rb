@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130713201558) do
+ActiveRecord::Schema.define(:version => 20130808171454) do
 
   create_table "animalrelations", :force => true do |t|
     t.integer  "animal_id"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20130713201558) do
     t.datetime "updated_at", :null => false
     t.string   "pnum"
     t.string   "orgnum"
+    t.string   "prodnum"
   end
 
   create_table "owners_users", :force => true do |t|

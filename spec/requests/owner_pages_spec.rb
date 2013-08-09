@@ -53,6 +53,7 @@ describe "Owner pages" do
     it { should have_selector('li', text:myowner.email) }
     it { should have_selector('li', text:myowner.pnum) }
     it { should have_selector('li', text:myowner.orgnum) }
+    it { should have_selector('li', text:myowner.prodnum) }
     it { should have_selector('li', text:myowner.living_animals.count.to_s)}
     it { should have_link('Edit', href: edit_owner_path(myowner))}
     it { should have_link('Close', href: owners_path)}
@@ -135,7 +136,12 @@ describe "Owner pages" do
 
     let(:submit) {"Update Owner"}
     describe "page" do
-      it{should have_selector('title', Text: 'Edit '+myowner.name)}
+      it { should have_selector('title', Text: 'Edit '+myowner.name)}
+      it { should have_css('input#owner_name')}
+      it { should have_css('input#owner_pnum') }
+      it { should have_css('input#owner_email') }
+      it { should have_css('input#owner_orgnum') }
+      it { should have_css('input#owner_prodnum') }
     end
   end
 
