@@ -8,13 +8,21 @@
       <ul>
         <li>E-mail: <%= @user.email %></li>
       </ul>
+      <%= link_to('Edit', edit_user_path, class: 'btn btn-large btn-primary') %>
+      <br/>
     </section>
     <section>
       <% if @user.owners.any? %>
         <h3>Assosiated owner</h3>
-        <%= link_to(@user.owner.name, owner_path(@user.owner)) %>
+        <%= link_to(@user.owner.name, owner_path(@user.owner), class: 'btn btn-primary') %>
+        <%= link_to('Owners', owners_path, class: 'btn btn-primary') %>
+      <% else %>
+        <h3>No owners assosiated with user</h3>
+        <%= link_to('Create Owner', new_owner_path, class: 'btn btn-primary') %>
+        <% if @owners_any %>
+          <%= link_to('Owners', owners_path, class: 'btn btn-primary') %>
+        <% end %>
       <% end %>
     </section>
-    <%= link_to('Edit', edit_user_path, class: 'btn btn-large btn-primary') %>
   </aside>
 </div>
