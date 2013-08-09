@@ -47,8 +47,6 @@ class AnimalsController < ApplicationController
   # GET /animals/1/edit
   def edit
     @animal = Animal.find(params[:id])
-    @male_animals = Animal.all_males
-    @female_animals = Animal.all_females
     respond_to do |format|
       format.html
       format.js
