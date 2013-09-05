@@ -24,25 +24,25 @@
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :PersonNumber, class: "control-label" %>
+      <%= f.label "Person number", class: "control-label" %>
       <div class="controls">
         <%= f.text_field :pnum %>
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :OrgnNumber, class: "control-label" %>
+      <%= f.label "Organisation number", class: "control-label" %>
       <div class="controls">
         <%= f.text_field :orgnum %>
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :ProdNumber, class: "control-label" %>
+      <%= f.label "Manufacturer number", class: "control-label" %>
       <div class="controls">
         <%= f.text_field :prodnum %>
       </div>
     </div>
     <div class="actions">
-      <%= f.submit "Create Owner", class: "btn btn-large btn-primary" %>
+      <%= f.submit yield(:SaveLabel), class: "btn btn-large btn-primary" %>
       <%= link_to 'Close', owners_path, class: "btn btn-large btn-primary" %>
     </div>
 <% end %>

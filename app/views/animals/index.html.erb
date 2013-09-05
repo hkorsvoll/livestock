@@ -1,35 +1,6 @@
 <div class="row">
   <div id="animal-list"  class="span6">
-    <h1>Husdyroversikt</h1>
-
-    <table>
-      <tr>
-	<th>Kjennemerke</th>
-	<th>Namn</th>
-	<th>Fødselsdato</th>
-	<th>Kjønn</th>
-	<th></th>
-	<th></th>
-	<th></th>
-      </tr>
-    <%= will_paginate %>
-    <% @animals.each do |animal| %>
-      <tr>
-	<td><%= animal.id_tag %></td>
-	<td><%= animal.name %></td>
-	<td><%= animal.birth_date %></td>
-	<td><%= animal.sex %></td>
-	<td><%= link_to 'Vis', animal, :remote=>true, :class=>'show_animal'  %></td>
-	<td><%= link_to 'Rediger', edit_animal_path(animal), :remote=>true, :class=>'edit_animal' %></td>
-	<td><%= link_to 'Slett', animal, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-    </table>
-    <%= will_paginate %>
-
-    <br />
-
-    <%= link_to 'Nytt dyr', new_animal_path, :remote=>true, :class=>'new_animal btn btn-large btn-primary' %>
+    <%=  render 'list' %>
   </div>
   <div id="display-details" class="span6">
   </div>

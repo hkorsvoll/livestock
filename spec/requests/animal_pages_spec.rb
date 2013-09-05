@@ -30,6 +30,7 @@ describe "Animal pages" do
       end
 
       it {should have_link('Nytt dyr',href: new_animal_path)}
+      it {should have_css('div#animal-list')}
 
       describe "pagination" do
         before {
@@ -50,6 +51,7 @@ describe "Animal pages" do
         it "should list each animal" do
           myowner.animals.paginate(page: 1).each do |animal|
             page.should have_selector('td', text: animal.id_tag)
+            page.should have_css('tr#animal_'+animal.id.to_s)
           end
         end
       end
@@ -89,6 +91,14 @@ describe "Animal pages" do
       it "should create an animal" do
         expect { click_button "Lagre" }.to change(Animal, :count).by(1)
       end
+
+      describe "display created animal together with animal list" do
+        before do
+          click_button 'Lagre'
+        end
+        it {should have_css('div#livestock-show-animal')}
+        it {should have_selector('td', text: "101")}
+      end
     end
 
   end
@@ -113,6 +123,31 @@ describe "Animal pages" do
       it {should have_css('select#animal_mother_id')}
       it {should have_css('select#animal_father_id')}
     end
+  end
+
+  describe "show" do
+    let(:animal1) {FactoryGirl.create(:animal, owner: myowner)}
+    before do
+      myuser.owner = myowner
+      sign_in myuser
+    end
+
+    describe "page" do
+      before{visit animal_path(animal1)}
+      it {should have_css('div#livestock-show-animal')}
+    end
+
+    describe "from index page" do
+      before do
+        animal1.save
+        visit animals_path
+        click_link "Vis"
+      end
+
+      it {should have_css('div#livestock-show-animal')}
+      it {should have_css('div#animal-list')}
+    end
+
   end
 
 end

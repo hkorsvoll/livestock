@@ -26,7 +26,7 @@ development:
 #   pool: 5
 #   timeout: 5000
 
-test:
+test: &test
   adapter: postgresql
   encoding: unicode
   database: livestock_test
@@ -48,3 +48,6 @@ production:
   pool: 5
   username: korsvoll
   password: 
+
+cucumber:
+  <<: *test

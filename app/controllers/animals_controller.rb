@@ -4,16 +4,7 @@ class AnimalsController < ApplicationController
   # GET /animals
   # GET /animals.json
   def index
-    start_year = Date.parse('1.1.1970')
-    end_year = Date.today
-    if params[:year] then
-      start_year = Date.parse('1.1.' + params[:year])
-      end_year = Date.parse('31.12.' + params[:year])
-    end
-
-    @animals = current_user.owners.first.animals.where("birth_date >= ? and birth_date <= ?",
-                            start_year,end_year).paginate(page: params[:page])
-
+    @animals = get_animals_for_pagination(params[:year])
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @animals }
@@ -58,11 +49,13 @@ class AnimalsController < ApplicationController
   def create
     @animal = Animal.new(params[:animal])
     @animal.owner = current_user.owners.first
+    @animals = get_animals_for_pagination(params[:year])
 
     respond_to do |format|
       if @animal.save
         format.html { redirect_to @animal, :remote=>true, :class=>'show_animal', :notice => 'Animal was successfully created.' }
-        format.json { render :json => @animal, :status => :created, :location => @animal }
+        #format.json { render :json => @animal, :status => :created, :location => @animal }
+        format.js
       else
         format.html { render :action => "new" }
         format.json { render :json => @animal.errors, :status => :unprocessable_entity }
@@ -75,11 +68,13 @@ class AnimalsController < ApplicationController
   def update
     @animal = Animal.find(params[:id])
     @animal.assign_attributes(params[:animal])
+    @animals = get_animals_for_pagination(params[:year])
 
     respond_to do |format|
       if @animal.save
-        format.html { redirect_to @animal, :notice => 'Animal was successfully updated.' }
-        format.json { head :no_content }
+        format.html { redirect_to @animal, :remote=>true, :class=>'show_animal', :notice => 'Animal was successfully updated.' }
+        #format.json { render :json => @animal, :status => :updated, :location => @animal }
+        format.js
       else
         format.html { render :action => "edit" }
         format.json { render :json => @animal.errors, :status => :unprocessable_entity }

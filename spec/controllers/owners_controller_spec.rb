@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe OwnersController do
-  let!(:myowner) {FactoryGirl.create(:owner)}
+  let(:myowner) {FactoryGirl.create(:owner)}
   let(:myuser) {FactoryGirl.create(:user, owners: [myowner])}
   before {sign_in myuser}
 

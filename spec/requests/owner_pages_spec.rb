@@ -135,6 +135,7 @@ describe "Owner pages" do
     end
 
     let(:submit) {"Update Owner"}
+    let(:newowner) {FactoryGirl.create(:owner, orgnum: "897516598", prodnum: "1411234056")}
     describe "page" do
       it { should have_selector('title', Text: 'Edit '+myowner.name)}
       it { should have_css('input#owner_name')}
@@ -142,6 +143,23 @@ describe "Owner pages" do
       it { should have_css('input#owner_email') }
       it { should have_css('input#owner_orgnum') }
       it { should have_css('input#owner_prodnum') }
+    end
+    describe "when changing some data" do
+      before do
+        fill_in :name,      with: myowner.name
+        fill_in :email,     with: myowner.email
+        fill_in :orgnum,    with: newowner.orgnum
+        fill_in :prodnum,   with: newowner.prodnum
+      end
+
+      it "should not create a new owner" do
+        expect {click_button submit}.not_to change(Owner, :count)
+      end
+
+      describe "after updating owner" do
+        before {click_button submit}
+        it { should have_selector('div.alert.alert-success', text: 'Owner updated') }
+      end
     end
   end
 
