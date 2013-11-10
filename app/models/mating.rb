@@ -8,11 +8,12 @@
 #  uncertainty :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  male_id     :integer
 #
 
 class Mating < ActiveRecord::Base
-  attr_accessible :mating_date, :uncertainty
+  attr_accessible :mating_date, :uncertainty, :animal_id, :male_id
 
   belongs_to :animal
-
+  belongs_to :male, :class_name => 'Animal'
 end

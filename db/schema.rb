@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130808171454) do
+ActiveRecord::Schema.define(:version => 20130906195808) do
 
   create_table "animalrelations", :force => true do |t|
     t.integer  "animal_id"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20130808171454) do
     t.integer  "uncertainty"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "male_id"
   end
 
   add_index "matings", ["animal_id"], :name => "index_matings_on_animal_id"

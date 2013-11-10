@@ -13,7 +13,14 @@
     <div class="control-group">
       <%= f.label :Parringsdato, class: "control-label" %>
       <div class="controls">
-        <%= f.date_select :mating_date, {}, { :style => "width: 23%" } %>
+        <%= f.text_field :mating_date, 'data-behaviour' => 'datepicker'  %>
+      </div>
+      <%= f.label :Vær, class: "control_label" %>
+      <div class="controls">
+        <%= f.collection_select(:male_id, @animal.owner.male_animals, :id, :name, {:prompt => true}) %>
+      </div>
+      <div class="controls">
+        <%= f.hidden_field :animal_id, value: @animal.id %>
       </div>
     </div>
 
