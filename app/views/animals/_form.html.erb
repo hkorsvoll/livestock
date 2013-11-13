@@ -26,7 +26,7 @@
   <div class="control-group">
     <%= f.label :Fødselsdato, class: "control-label" %>
     <div class="controls">
-        <%= f.date_select :birth_date, {}, { :style => "width: 23%" } %>
+        <%= f.text_field :birth_date, 'data-behaviour' => 'datepicker' %>
     </div>
   </div>
   <div class="control-group">

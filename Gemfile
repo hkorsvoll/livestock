@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby                            '1.9.3'
 
 gem 'rails',                    '3.2.9'
-gem 'bootstrap-sass',           '2.0.4'
+gem 'bootstrap-sass',           '2.3.2'
 gem 'bcrypt-ruby',              '3.0.1'
 gem 'faker',                    '1.0.1'
 gem 'will_paginate',            '3.0.3'
@@ -15,6 +15,8 @@ gem 'uuidtools',                '2.1.3'
 gem 'taps',                     '0.3.24'
 gem 'json',                     '1.7.5'
 gem 'rails-i18n',               '~> 3.0.0.pre'
+gem 'bootstrap-datepicker-rails'
+gem 'bootstrap-x-editable-rails'
 
 group :development, :test do
   gem 'sqlite3',      '1.3.5'

@@ -2,6 +2,7 @@ class MatingsController < ApplicationController
 
   def new
     @mating = Mating.new()
+    @animal = Animal.find(params[:animal])
     respond_to do |format|
       format.json { render :json => @mating }
       format.js

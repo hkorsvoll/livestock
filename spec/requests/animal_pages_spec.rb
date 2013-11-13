@@ -82,9 +82,7 @@ describe "Animal pages" do
       before do
         fill_in 'animal_id_tag', with: "101"
         fill_in 'animal_name',   with: "Sau 101"
-        select '2012',    from: 'animal_birth_date_1i'
-        select 'April',   from: 'animal_birth_date_2i'
-        select '20',      from: 'animal_birth_date_3i'
+        fill_in 'animal_birth_date', with: '2012-04-20'
         select 'Female',  from: 'animal_sex'
       end
 
@@ -117,9 +115,7 @@ describe "Animal pages" do
       it {should have_css('input#animal_name')}
       it {should have_css('input#animal_id_tag')}
       it {should have_css('select#animal_sex')}
-      it {should have_css('select#animal_birth_date_1i')}
-      it {should have_css('select#animal_birth_date_2i')}
-      it {should have_css('select#animal_birth_date_3i')}
+      it {should have_css('input#animal_birth_date')}
       it {should have_css('select#animal_mother_id')}
       it {should have_css('select#animal_father_id')}
     end
@@ -145,7 +141,7 @@ describe "Animal pages" do
       end
 
       it {should have_css('div#livestock-show-animal')}
-      it {should have_css('div#animal-list')}
+      #it {should have_css('div#animal-list')}
     end
 
   end

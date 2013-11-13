@@ -8,6 +8,7 @@
 #  uncertainty :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  male_id     :integer
 #
 
 require 'spec_helper'
@@ -24,6 +25,7 @@ describe Mating do
   it { should respond_to(:animal_id) }
   it { should respond_to(:mating_date)}
   it { should respond_to(:uncertainty)}
+  it { should respond_to(:male)}
 
   it {should be_valid}
 
