@@ -5,6 +5,7 @@ class AnimalsController < ApplicationController
   # GET /animals.json
   def index
     @animals = get_animals_for_pagination(params[:year])
+    @years = get_years_in_stock_for_current_user
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @animals }
@@ -50,11 +51,12 @@ class AnimalsController < ApplicationController
     @animal = Animal.new(params[:animal])
     @animal.owner = current_user.owners.first
     @animals = get_animals_for_pagination(params[:year])
+    @years = get_years_in_stock_for_current_user
 
     respond_to do |format|
       if @animal.save
-        format.html { redirect_to @animal, :remote=>true, :class=>'show_animal', :notice => 'Animal was successfully created.' }
-        #format.json { render :json => @animal, :status => :created, :location => @animal }
+        format.html { redirect_to @animal, remote: true, :class=>'show_animal', :notice => 'Animal was successfully created.' }
+        format.json { render :json => @animal, :status => :created, :location => @animal }
         format.js
       else
         format.html { render :action => "new" }

@@ -1,5 +1,12 @@
 <h1>Husdyroversikt</h1>
 
+<% unless @years.nil? then %>
+<ul>
+  <% @years.each do |year| %>
+    <li><%= link_to year, animals_path(year: year) %></li>
+  <% end %>
+</ul>
+<% end %>
 <table>
   <tr>
     <th>Kjennemerke</th>

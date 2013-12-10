@@ -1,5 +1,6 @@
 module AnimalsHelper
   include UsersHelper
+  include SessionsHelper
   def add_matingdate(animal)
   end
 
@@ -17,8 +18,21 @@ module AnimalsHelper
       end_year = Date.parse('31.12.' + year)
     end
 
-    current_user.owners.first.animals.where("birth_date >= ? and birth_date <= ?",
+    current_user.owner.animals.where("birth_date >= ? and birth_date <= ?",
            start_year,end_year).paginate(page: params[:page])
   end
 
+  def get_years_in_stock(owner)
+    years = []
+    for animal in owner.living_animals do
+      if not years.include? animal.birth_date.year then
+        years << animal.birth_date.year
+      end
+    end
+    years
+  end
+
+  def get_years_in_stock_for_current_user
+    get_years_in_stock(current_user.owner)
+  end
 end
