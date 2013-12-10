@@ -24,6 +24,13 @@ class AnimalsController < ApplicationController
     end
   end
 
+  # GET /animals/close
+  def close
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # GET /animals/new
   # GET /animals/new.json
   def new

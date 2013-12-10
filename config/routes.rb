@@ -1,7 +1,11 @@
 Livestock::Application.routes.draw do
 
   resources :notes
-  resources :animals
+  resources :animals do
+    collection do
+      get 'close'
+    end
+  end
   resources :users
   resources :owners
   resources :matings,     only: [:new, :create, :destroy]
