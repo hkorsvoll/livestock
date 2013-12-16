@@ -1,4 +1,7 @@
 <div id="livestock-show-animal">
+  <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+  <% end %>
   <% if @animal.sex = "female" %>
     <h1>Søye <%= @animal.id_tag %></h1>
   <% else %>

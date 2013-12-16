@@ -1,1 +1,2 @@
 $('#display-details').html("<%= escape_javascript(render :partial => 'animals/show') %>");
+$("#animal_<%= escape_javascript @animal.id.to_s%>").addClass('success');

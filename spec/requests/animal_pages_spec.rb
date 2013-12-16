@@ -95,7 +95,7 @@ describe "Animal pages" do
           click_button 'Lagre'
         end
         it {should have_css('div#livestock-show-animal')}
-        it {should have_selector('h1', text: "Søye 101")}
+        it {should have_selector('td', text: "101")}
       end
     end
 
