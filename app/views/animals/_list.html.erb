@@ -1,34 +1,46 @@
 <h1>Husdyroversikt</h1>
-
 <% unless @years.nil? then %>
-<ul>
+<ul class='nav nav-tabs'>
   <% @years.each do |year| %>
-    <li><%= link_to year, animals_path(year: year) %></li>
+    <% unless selected_year.nil? %>
+        <% if year.to_s.eql?(selected_year.to_s)%>
+          <li class="active">
+        <% else %>
+          <li>
+        <% end %>
+    <% else %>
+        <li>
+    <% end %>
+    <%= link_to year, animals_path(year: year) %></li>
   <% end %>
 </ul>
 <% end %>
-<table>
-  <tr>
-    <th>Kjennemerke</th>
-    <th>Namn</th>
-    <th>Fødselsdato</th>
-    <th>Kjønn</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-  <%= will_paginate %>
-  <% @animals.each do |animal| %>
-      <tr id="animal_<%= animal.id.to_s %>">
-        <td><%= animal.id_tag %></td>
-        <td><%= animal.name %></td>
-        <td><%= animal.birth_date %></td>
-        <td><%= animal.sex %></td>
-        <td><%= link_to 'Vis', animal, :remote=>true, :class=>'show_animal'  %></td>
-        <td><%= link_to 'Rediger', edit_animal_path(animal), :remote=>true, :class=>'edit_animal' %></td>
-        <td><%= link_to 'Slett', animal, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+<table class="table table-hover">
+  <thead>
+      <tr>
+        <th>Kjennemerke</th>
+        <th>Namn</th>
+        <th>Fødselsdato</th>
+        <th>Kjønn</th>
+        <th></th>
+        <th></th>
+        <th></th>
       </tr>
-  <% end %>
+  </thead>
+  <tbody>
+      <%= will_paginate %>
+      <% @animals.each do |animal| %>
+          <tr id="animal_<%= animal.id.to_s %>">
+            <td><%= animal.id_tag %></td>
+            <td><%= animal.name %></td>
+            <td><%= animal.birth_date %></td>
+            <td><%= animal.sex %></td>
+            <td><%= link_to 'Vis', animal, :remote=>true, :class=>'show_animal'  %></td>
+            <td><%= link_to 'Rediger', edit_animal_path(animal), :remote=>true, :class=>'edit_animal' %></td>
+            <td><%= link_to 'Slett', animal, remote: true, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+          </tr>
+      <% end %>
+  </tbody>
 </table>
 <%= will_paginate %>
 

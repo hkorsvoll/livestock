@@ -7,7 +7,7 @@ class AnimalsController < ApplicationController
     @animals = get_animals_for_pagination(params[:year])
     @years = get_years_in_stock_for_current_user
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render locals: {selected_year: params[:year]}}
       format.json { render :json => @animals }
     end
   end
@@ -57,12 +57,13 @@ class AnimalsController < ApplicationController
   def create
     @animal = Animal.new(params[:animal])
     @animal.owner = current_user.owners.first
-    @animals = get_animals_for_pagination(params[:year])
+    @animals = get_animals_for_pagination(@animal.birth_date.year.to_s)
     @years = get_years_in_stock_for_current_user
 
     respond_to do |format|
       if @animal.save
-        format.html { redirect_to @animal, remote: true, :class=>'show_animal', :notice => 'Animal was successfully created.' }
+        flash[:notice] = 'Animal was successfully created.'
+        format.html { redirect_to @animal, remote: true, :class=>'show_animal' }
         format.json { render :json => @animal, :status => :created, :location => @animal }
         format.js
       else
@@ -77,12 +78,14 @@ class AnimalsController < ApplicationController
   def update
     @animal = Animal.find(params[:id])
     @animal.assign_attributes(params[:animal])
-    @animals = get_animals_for_pagination(params[:year])
+    @animals = get_animals_for_pagination(@animal.birth_date.year.to_s)
+    @years = get_years_in_stock_for_current_user
 
     respond_to do |format|
       if @animal.save
-        format.html { redirect_to @animal, :remote=>true, :class=>'show_animal', :notice => 'Animal was successfully updated.' }
-        #format.json { render :json => @animal, :status => :updated, :location => @animal }
+        flash[:notice] = 'Animal was successfully updated.'
+        format.html { redirect_to @animal, :remote=>true, :class=>'show_animal' }
+        format.json { render :json => @animal, :status => :updated, :location => @animal }
         format.js
       else
         format.html { render :action => "edit" }
@@ -95,11 +98,17 @@ class AnimalsController < ApplicationController
   # DELETE /animals/1.json
   def destroy
     @animal = Animal.find(params[:id])
+    @animals = get_animals_for_pagination(@animal.birth_date.year.to_s)
+    animal_id = @animal.id_tag
     @animal.destroy
+    @years = get_years_in_stock_for_current_user
+
 
     respond_to do |format|
-      format.html { redirect_to animals_url }
+      flash[:notice] = 'Animal '+ animal_id +' was deleted.'
+      format.html { redirect_to animals_url, remote: true}
       format.json { head :no_content }
+      format.js
     end
   end
 end
